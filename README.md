@@ -97,3 +97,27 @@ Do not upload `.env`, passwords, or a Supabase service-role/secret key.
 ### Enable Pages
 In repository **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions**.
 Then open the **Actions** tab and wait for `Deploy Personal Finance Manager` to finish.
+
+
+## Bank & Cash Management upgrade
+
+This version adds bank accounts, e-wallets, cash on hand, deposits, withdrawals,
+inter-account transfers, current cash totals and an estimated net-worth figure.
+
+### Database upgrade for an existing Supabase project
+After deploying the updated frontend, open Supabase SQL Editor and run:
+`supabase/bank_cash_migration.sql`
+
+This is an additive migration. It creates three new tables and does not delete or
+rewrite your existing income, deduction, debt or expense records.
+
+### How account balances work
+- Opening balance is the real balance in the account on the day you start tracking it.
+- Deposits increase the account balance.
+- Withdrawals decrease the account balance.
+- Transfers decrease the source account and increase the destination account.
+- Transfers are not treated as income or expenses.
+- Existing salary/expense entries do not automatically alter account balances. Record the actual cash movement under Bank & Cash to keep account balances reconciled. Avoid recording the same cash movement twice.
+
+The estimated net worth shown here is total tracked cash/bank/e-wallet balances less
+tracked outstanding loans. It is not a full assets-and-liabilities statement.

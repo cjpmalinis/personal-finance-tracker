@@ -67,3 +67,33 @@ Loan repayments are entered as expense records and linked to a loan in the "Link
 - CSV exports are provided; PDF export and automated bank syncing are not included.
 - Monthly report figures use the date recorded on each transaction.
 - The app does not contain your old Excel data automatically. Import/encoding of historical records should be done after the database is configured.
+
+
+## GitHub Pages deployment (configured)
+
+This project is configured for the repository:
+`cjpmalinis/personal-finance-tracker`
+
+The `vite.config.js` file sets the correct repository base path, and
+`.github/workflows/deploy.yml` builds and deploys the site on every push to `main`.
+
+### Upload the project to GitHub
+1. Extract this ZIP on your computer.
+2. Open the repository on GitHub.
+3. Use **Add file → Upload files**.
+4. Upload the contents of the extracted project folder (including hidden `.github` folder).
+5. Commit the upload to the `main` branch.
+
+If GitHub's browser upload does not show hidden folders, create `.github/workflows/deploy.yml`
+through **Add file → Create new file** using the included workflow content.
+
+### Add GitHub Actions secrets
+In repository **Settings → Secrets and variables → Actions**, create:
+- `VITE_SUPABASE_URL` = your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` = your Supabase publishable key
+
+Do not upload `.env`, passwords, or a Supabase service-role/secret key.
+
+### Enable Pages
+In repository **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions**.
+Then open the **Actions** tab and wait for `Deploy Personal Finance Manager` to finish.
